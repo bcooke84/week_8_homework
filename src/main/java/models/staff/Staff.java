@@ -1,5 +1,7 @@
 package models.staff;
 
+import team.Team;
+
 import javax.persistence.*;
 import java.util.GregorianCalendar;
 
@@ -18,10 +20,12 @@ public abstract class Staff {
     public Staff() {
     }
 
-    public Staff(String name, int salary, int age) {
+    public Staff(String name, int salary, int age, GregorianCalendar contractStart, GregorianCalendar contractEnd) {
         this.name = name;
         this.salary = salary;
         this.age = age;
+        this.contractStart = contractStart;
+        this.contractEnd = contractEnd;
     }
 
     @Id
@@ -44,6 +48,7 @@ public abstract class Staff {
         this.name = name;
     }
 
+
     @Column(name = "salary")
     public int getSalary() {
         return salary;
@@ -62,7 +67,7 @@ public abstract class Staff {
         this.age = age;
     }
 
-    @Column(name="contractStart")
+    @Column(name = "contractStart")
     public GregorianCalendar getContractStart() {
         return contractStart;
     }
@@ -71,7 +76,7 @@ public abstract class Staff {
         this.contractStart = contractStart;
     }
 
-    @Column(name="contractEnd")
+    @Column(name = "contractEnd")
     public GregorianCalendar getContractEnd() {
         return contractEnd;
     }

@@ -14,5 +14,10 @@
         <mapping class="models.staff.Staff" />
         <mapping class="models.staff.Player" />
         <mapping class="models.staff.Manager" />
+        <mapping class="team.Team" />
+        <mapping class="match.Match" />
+        <mapping class="competition.Competition" />
+        <mapping class="competition.Cup" />
+        <mapping class="competition.League" />
     </session-factory>
 </hibernate-configuration>

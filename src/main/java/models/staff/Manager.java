@@ -2,10 +2,8 @@ package models.staff;
 
 import team.Team;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.GregorianCalendar;
 
 @Entity
 @Table(name="managers")
@@ -17,9 +15,10 @@ public class Manager extends Staff {
     public Manager() {
     }
 
-    public Manager(String name, int salary, int age, String formation) {
-        super(name, salary, age);
+    public Manager(String name, int salary, int age, GregorianCalendar contractStart, GregorianCalendar contractEnd, String formation) {
+        super(name, salary, age, contractStart, contractEnd);
         this.formation = formation;
+
     }
 
     @Column(name = "formation")
@@ -31,7 +30,7 @@ public class Manager extends Staff {
         this.formation = formation;
     }
 
-    @Column(name = "team")
+    @OneToOne(mappedBy = "manager", cascade = CascadeType.PERSIST)
     public Team getTeam() {
         return team;
     }
@@ -39,4 +38,7 @@ public class Manager extends Staff {
     public void setTeam(Team team) {
         this.team = team;
     }
+
+
+
 }
