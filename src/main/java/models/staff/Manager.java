@@ -15,10 +15,9 @@ public class Manager extends Staff {
     public Manager() {
     }
 
-    public Manager(String name, int salary, int age, GregorianCalendar contractStart, GregorianCalendar contractEnd, String formation) {
-        super(name, salary, age, contractStart, contractEnd);
+    public Manager(String name, int age, String formation) {
+        super(name, age);
         this.formation = formation;
-
     }
 
     @Column(name = "formation")

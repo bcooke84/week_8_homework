@@ -15,10 +15,9 @@ public class Player extends Staff {
     public Player() {
     }
 
-    public Player(String name, int salary, int age, GregorianCalendar contractStart, GregorianCalendar contractEnd, Position position, int squadNumber) {
-        super(name, salary, age, contractStart, contractEnd);
+    public Player(String name, int age, Position position) {
+        super(name, age);
         this.position = position;
-        this.squadNumber = squadNumber;
     }
 
     @Enumerated(EnumType.STRING)
@@ -49,4 +48,11 @@ public class Player extends Staff {
     public void setTeam(Team team) {
         this.team = team;
     }
+
+    public void signForTeam(Team team, int squadNumber, int salary) {
+        this.team = team;
+        this.setSquadNumber(squadNumber);
+        this.setSalary(salary);
+    }
+
 }

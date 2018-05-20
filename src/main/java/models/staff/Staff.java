@@ -13,19 +13,14 @@ public abstract class Staff {
     private String name;
     private int salary;
     private int age;
-    private GregorianCalendar contractStart;
-    private GregorianCalendar contractEnd;
 
 
     public Staff() {
     }
 
-    public Staff(String name, int salary, int age, GregorianCalendar contractStart, GregorianCalendar contractEnd) {
+    public Staff(String name, int age) {
         this.name = name;
-        this.salary = salary;
         this.age = age;
-        this.contractStart = contractStart;
-        this.contractEnd = contractEnd;
     }
 
     @Id
@@ -67,21 +62,4 @@ public abstract class Staff {
         this.age = age;
     }
 
-    @Column(name = "contractStart")
-    public GregorianCalendar getContractStart() {
-        return contractStart;
-    }
-
-    public void setContractStart(GregorianCalendar contractStart) {
-        this.contractStart = contractStart;
-    }
-
-    @Column(name = "contractEnd")
-    public GregorianCalendar getContractEnd() {
-        return contractEnd;
-    }
-
-    public void setContractEnd(GregorianCalendar contractEnd) {
-        this.contractEnd = contractEnd;
-    }
 }

@@ -1,10 +1,13 @@
 package db;
 
+import models.staff.Manager;
+import models.staff.Player;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import team.Team;
 
 import java.util.List;
 
@@ -89,5 +92,18 @@ public class DBHelper {
         }
     }
 
+    public static void signPlayer(Team team, Player player, int squadNumber, int salary) {
+        team.addPlayer(player);
+        player.signForTeam(team, squadNumber, salary);
+        DBHelper.save(player);
+        DBHelper.save(team);
+    }
+
+    public static void signManager(Team team, Manager manager, int salary) {
+        team.addManager(manager);
+        manager.setSalary(salary);
+        DBHelper.save(manager);
+        DBHelper.save(team);
+    }
 
 }

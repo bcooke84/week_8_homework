@@ -1,10 +1,12 @@
 package team;
 
 import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
+import db.DBHelper;
 import models.staff.Manager;
 import models.staff.Player;
 
 import javax.persistence.*;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,7 +17,8 @@ public class Team {
 
     private int id;
     private String name;
-    private Set<match.Match> matches;
+    private Set<match.Match> homeMatches;
+    private Set<match.Match> awayMatches;
     private Set<Player> players;
     private Manager manager;
     private String stadium;
@@ -26,7 +29,8 @@ public class Team {
 
     public Team(String name, String stadium, Manager manager) {
         this.name = name;
-        this.matches = new HashSet<match.Match>();
+        this.homeMatches = new HashSet<match.Match>();
+        this.awayMatches = new HashSet<match.Match>();
         this.players = new HashSet<Player>();
         this.stadium = stadium;
         this.manager = manager;
@@ -53,16 +57,23 @@ public class Team {
         this.name = name;
     }
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "team_matches",
-    joinColumns = {@JoinColumn(name = "team_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "match_id", nullable = false, updatable = false)})
-    public Set<match.Match> getMatches() {
-        return matches;
+    @OneToMany(mappedBy = "homeTeam")
+    public Set<match.Match> getHomeMatches() {
+        return homeMatches;
     }
 
-    public void setMatches(Set<match.Match> matches) {
-        this.matches = matches;
+    public void setHomeMatches(Set<match.Match> homeMatches) {
+        this.homeMatches = homeMatches;
+    }
+
+
+    @OneToMany(mappedBy = "awayTeam")
+    public Set<match.Match> getAwayMatches() {
+        return awayMatches;
+    }
+
+    public void setAwayMatches(Set<match.Match> awayMatches) {
+        this.awayMatches = awayMatches;
     }
 
     @OneToMany(mappedBy = "team")
@@ -108,4 +119,22 @@ public class Team {
     public void addManager(Manager manager) {
         this.manager = manager;
     }
+
+    public void addHomeMatch(match.Match match) {
+        this.homeMatches.add(match);
+    }
+
+    public void addAwayMatch(match.Match match) {
+        this.awayMatches.add(match);
+    }
+
+    public void winMatch() {
+        this.points += 3;
+    }
+
+    public void drawMatch() {
+        this.points += 1;
+    }
+
+
 }
