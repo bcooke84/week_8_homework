@@ -3,9 +3,11 @@ import competition.Cup;
 import competition.League;
 import db.DBCompetition;
 import db.DBHelper;
+import db.DBMatch;
 import db.DBTeam;
 import match.Match;
 import models.staff.Manager;
+import models.staff.MatchResult;
 import models.staff.Player;
 import models.staff.Position;
 import team.Team;
@@ -43,13 +45,6 @@ public class Runner {
         Team team1 = new Team("Celtic", "Celtic Park", manager1);
         Team team2 = new Team("Aberdeen", "Pittodrie", manager2);
         Team team3 = new Team("Motherwell", "Fir Park", manager3);
-
-        team1.winMatch();
-        team1.winMatch();
-        team1.winMatch();
-        team3.winMatch();
-        team3.winMatch();
-        team2.drawMatch();
 
 
         DBHelper.save(team1);
@@ -89,6 +84,10 @@ public class Runner {
         DBHelper.signManager(team1, manager1, 25000);
 
         Manager currentManager = DBHelper.find(Manager.class, manager1.getId());
+
+        DBMatch.updateResults(match1, MatchResult.HOMEWIN);
+        DBMatch.updateResults(match2, MatchResult.DRAW);
+        DBMatch.updateResults(match1, MatchResult.AWAYWIN);
 
         List<Team> leagueTable = DBCompetition.sortedTeams(league);
 

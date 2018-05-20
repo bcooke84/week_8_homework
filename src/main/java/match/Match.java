@@ -87,5 +87,14 @@ public class Match {
 
     public void setMatchResult(MatchResult matchResult) {
         this.matchResult = matchResult;
+        if (matchResult == MatchResult.HOMEWIN) {
+            homeTeam.winMatch();
+        } else if (this.matchResult == MatchResult.AWAYWIN) {
+            awayTeam.winMatch();
+        }
+        else {
+            homeTeam.drawMatch();
+            awayTeam.drawMatch();
+        }
     }
 }
